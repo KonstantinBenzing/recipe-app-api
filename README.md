@@ -16,3 +16,7 @@ docker-compose run --rm app sh -c "python manage.py startapp core"
 ```
 docker-compose run --rm app sh -c "python manage.py test"
 ```
+## run tests including linting (flake8)
+```
+docker-compose run --rm app sh -c "python manage.py test  && flake8"
+```
