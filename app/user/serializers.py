@@ -1,6 +1,8 @@
 """
 Serializers for the user API View.
 """
+from abc import ABC
+
 from django.contrib.auth import (
     get_user_model,
     authenticate,
