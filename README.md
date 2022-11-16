@@ -53,3 +53,7 @@ docker-compose run --rm app sh -c "flake8"
 Type: Swagger
 url: http://127.0.0.1:8000/api/docs/
 url: http://localhost:8000/api/docs/
+
+Testing with user:
+user: user2@example.com
+pw: Awesome123
