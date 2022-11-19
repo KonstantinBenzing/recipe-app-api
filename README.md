@@ -8,6 +8,7 @@ docker compose up
 ```
 
 ### Build docker environment
+use it especially after making adjustments in the Dockerfile and/or requirements files
 ```
 docker-compose build
 ```
@@ -46,6 +47,12 @@ docker-compose run --rm app sh -c "python manage.py test  && flake8"
 ```
 docker-compose run --rm app sh -c "flake8"
 ```
+
+### gather static files
+```
+docker-compose run --rm app sh -c "python manage.py collectstatic"
+```
+
 
 ## Gathered info
 
