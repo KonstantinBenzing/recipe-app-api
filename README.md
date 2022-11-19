@@ -69,5 +69,45 @@ pw: Awesome123
 
 ### start server
 ```
+docker-compose -f docker-compose-deploy.yml down --volumes
 docker-compose -f docker-compose-deploy.yml up
+```
+
+### keys example for AWS
+```
+ssh-keygen -t rsa -b 4096
+/Users/.../.ssh/aws_id_rsa
+<passphrase>
+cat ~/.ssh/aws_id_rsa.pub
+```
+copy the content and add as key to server
+
+### connect with key to running server instance
+```
+ssh-add ~/.ssh/aws_id_rsa
+<passphrase>
+ssh <user>@<ip>
+[yes]
+```
+-> connected! cli shows [...]$
+
+### create key on server
+```
+ssh-keygen -t ed25519 -b 4096
+```
+accept location and skip passphrase (if not needed)
+```
+cat ~/.ssh/id_ed25519.pub
+```
+copy the key
+go to
+- Github
+- project
+- Deploy keys
+
+-> add deploy key from server
+
+## Run commands on server
+```
+docker-compose -f docker-compose-deploy.yml run --rm app sh -c "python manage.py <command>"
 ```
