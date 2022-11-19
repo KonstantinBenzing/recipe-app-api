@@ -64,3 +64,10 @@ url: http://localhost:8000/api/docs/
 Testing with user:
 user: user2@example.com
 pw: Awesome123
+
+## DEPLOYMENT
+
+### start server
+```
+docker-compose -f docker-compose-deploy.yml up
+```
