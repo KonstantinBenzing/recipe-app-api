@@ -1,4 +1,6 @@
-"""Database models."""
+"""
+Database models.
+"""
 import uuid
 import os
 
@@ -23,7 +25,7 @@ class UserManager(BaseUserManager):
     """Manager for users."""
 
     def create_user(self, email, password=None, **extra_fields):
-        """Create, save, and return a new user."""
+        """Create, saveand return a new user."""
         if not email:
             raise ValueError('User must have an email address.')
         user = self.model(email=self.normalize_email(email), **extra_fields)
@@ -55,7 +57,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Recipe(models.Model):
-    """Recipe object"""
+    """Recipe object."""
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

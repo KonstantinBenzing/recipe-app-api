@@ -1,5 +1,5 @@
 """
-Tests for the tags APi.
+Tests for the tags API.
 """
 from decimal import Decimal
 
@@ -10,7 +10,10 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from core.models import Tag, Recipe
+from core.models import (
+    Tag,
+    Recipe,
+)
 
 from recipe.serializers import TagSerializer
 
@@ -23,12 +26,12 @@ def detail_url(tag_id):
     return reverse('recipe:tag-detail', args=[tag_id])
 
 
-def create_user(email='user@example.com', password='testpass132'):
+def create_user(email='user@example.com', password='testpass123'):
     """Create and return a user."""
     return get_user_model().objects.create_user(email=email, password=password)
 
 
-class PublicTagsApiTest(TestCase):
+class PublicTagsApiTests(TestCase):
     """Test unauthenticated API requests."""
 
     def setUp(self):
@@ -75,7 +78,7 @@ class PrivateTagsApiTests(TestCase):
         self.assertEqual(res.data[0]['id'], tag.id)
 
     def test_update_tag(self):
-        """Test updating a tag"""
+        """Test updating a tag."""
         tag = Tag.objects.create(user=self.user, name='After Dinner')
 
         payload = {'name': 'Dessert'}
@@ -98,7 +101,7 @@ class PrivateTagsApiTests(TestCase):
         self.assertFalse(tags.exists())
 
     def test_filter_tags_assigned_to_recipes(self):
-        """Test listing tags by those assigned to recipes."""
+        """Test listing tags to those assigned to recipes."""
         tag1 = Tag.objects.create(user=self.user, name='Breakfast')
         tag2 = Tag.objects.create(user=self.user, name='Lunch')
         recipe = Recipe.objects.create(

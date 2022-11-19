@@ -10,24 +10,28 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from core.models import Ingredient, Recipe
+from core.models import (
+    Ingredient,
+    Recipe,
+)
 
 from recipe.serializers import IngredientSerializer
+
 
 INGREDIENTS_URL = reverse('recipe:ingredient-list')
 
 
 def detail_url(ingredient_id):
-    """Create and return an ingredient detail url."""
+    """Create and return an ingredient detail URL."""
     return reverse('recipe:ingredient-detail', args=[ingredient_id])
 
 
-def create_user(email='user@example.com', password='testpass132'):
-    """Create and return a user."""
+def create_user(email='user@example.com', password='testpass123'):
+    """Create and return user."""
     return get_user_model().objects.create_user(email=email, password=password)
 
 
-class PublicIngredientsApiTest(TestCase):
+class PublicIngredientsApiTests(TestCase):
     """Test unauthenticated API requests."""
 
     def setUp(self):
@@ -49,7 +53,7 @@ class PrivateIngredientsApiTests(TestCase):
         self.client.force_authenticate(self.user)
 
     def test_retrieve_ingredients(self):
-        """Test retrieving a list of tags."""
+        """Test retrieving a list of ingredients."""
         Ingredient.objects.create(user=self.user, name='Kale')
         Ingredient.objects.create(user=self.user, name='Vanilla')
 
@@ -97,7 +101,7 @@ class PrivateIngredientsApiTests(TestCase):
         self.assertFalse(ingredients.exists())
 
     def test_filter_ingredients_assigned_to_recipes(self):
-        """Test listing ingredients by those assigned to recipes."""
+        """Test listing ingredients to those assigned to recipes."""
         in1 = Ingredient.objects.create(user=self.user, name='Apples')
         in2 = Ingredient.objects.create(user=self.user, name='Turkey')
         recipe = Recipe.objects.create(
