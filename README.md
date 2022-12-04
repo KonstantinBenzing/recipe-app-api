@@ -107,6 +107,19 @@ go to
 
 -> add deploy key from server
 
+
+## Local deployment
+remove all existing instances from local development environment
+```
+docker-compose -f docker-compose-deploy.yml down --volumes
+```
+start fresh instance
+```
+docker-compose -f docker-compose-deploy.yml build
+docker-compose -f docker-compose-deploy.yml up
+```
+
+
 ## Run commands on server
 ```
 docker-compose -f docker-compose-deploy.yml run --rm app sh -c "python manage.py <command>"
